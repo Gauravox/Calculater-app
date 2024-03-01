@@ -1,1 +1,368 @@
+package com.example.calculator;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.util.TypedValue;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+    private Button BUTTON_NO_1;
+    private Button BUTTON_NO_2;
+    private Button BUTTON_NO_3;
+    private Button BUTTON_NO_4;
+    private Button BUTTON_NO_5;
+    private Button BUTTON_NO_6;
+    private Button BUTTON_NO_7;
+    private Button BUTTON_NO_8;
+    private Button BUTTON_NO_9;
+    private Button BUTTON_NO_0;
+    private Button BUTTON_EQUAL;
+    private Button BUTTON_MULTI;
+    private Button BUTTON_DIVIDE;
+    private Button BUTTON_ADD;
+    private Button BUTTON_SUB;
+    private Button BUTTON_CLEAR;
+    private Button BUTTON_DOT;
+    private Button b_para1;
+    private Button b_para2;
+    private TextView TEXTVIEW_0;
+    private TextView TEXTVIEW_1;
+    private final char ADDITION = '+';
+    private final char SUBTRACTION = '-';
+    private final char MULTIPLICATION = '*';
+    private final char DIVISION = '/';
+    private final char EQU = '=';
+    private final char EXTRA = '@';
+    private final char MODULUS = '%';
+    private char ACTION;
+    private double val1 = Double.NaN;
+    private double val2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        GET_ASSIGN();
+        SET_ON_CLICK();
+
+
+    }
+
+    public void GET_ASSIGN(){
+        BUTTON_NO_1 = findViewById(R.id.button1);
+        BUTTON_NO_2 = findViewById(R.id.button2);
+        BUTTON_NO_3 = findViewById(R.id.button3);
+        BUTTON_NO_4 = findViewById(R.id.button4);
+        BUTTON_NO_5 = findViewById(R.id.button5);
+        BUTTON_NO_6 = findViewById(R.id.button6);
+        BUTTON_NO_7 = findViewById(R.id.button7);
+        BUTTON_NO_8 = findViewById(R.id.button8);
+        BUTTON_NO_9 = findViewById(R.id.button9);
+        BUTTON_NO_0 = findViewById(R.id.button0);
+        BUTTON_EQUAL = findViewById(R.id.button_equal);
+        BUTTON_MULTI = findViewById(R.id.button_multi);
+        BUTTON_DIVIDE = findViewById(R.id.button_divide);
+        BUTTON_ADD = findViewById(R.id.button_add);
+        BUTTON_SUB = findViewById(R.id.button_sub);
+        BUTTON_CLEAR = findViewById(R.id.button_clear);
+        BUTTON_DOT = findViewById(R.id.button_dot);
+        b_para1 = findViewById(R.id.button_para1);
+        b_para2 = findViewById(R.id.button_para2);
+        TEXTVIEW_0 = findViewById(R.id.input);
+        TEXTVIEW_1 = findViewById(R.id.output);
+    }
+
+    public void SET_ON_CLICK(){
+
+        BUTTON_NO_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ERROR();
+                LENGTH();
+                TEXTVIEW_0.setText(TEXTVIEW_0.getText().toString() + "1");
+            }
+        });
+
+        BUTTON_NO_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ERROR();
+                LENGTH();
+                TEXTVIEW_0.setText(TEXTVIEW_0.getText().toString() + "2");
+            }
+        });
+
+        BUTTON_NO_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ERROR();
+                LENGTH();
+                TEXTVIEW_0.setText(TEXTVIEW_0.getText().toString() + "3");
+            }
+        });
+
+        BUTTON_NO_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ERROR();
+                LENGTH();
+                TEXTVIEW_0.setText(TEXTVIEW_0.getText().toString() + "4");
+            }
+        });
+
+        BUTTON_NO_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ERROR();
+                LENGTH();
+                TEXTVIEW_0.setText(TEXTVIEW_0.getText().toString() + "5");
+            }
+        });
+
+        BUTTON_NO_6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ERROR();
+                LENGTH();
+                TEXTVIEW_0.setText(TEXTVIEW_0.getText().toString() + "6");
+            }
+        });
+
+        BUTTON_NO_7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ERROR();
+                LENGTH();
+                TEXTVIEW_0.setText(TEXTVIEW_0.getText().toString() + "7");
+            }
+        });
+
+        BUTTON_NO_8.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ERROR();
+                LENGTH();
+                TEXTVIEW_0.setText(TEXTVIEW_0.getText().toString() + "8");
+            }
+        });
+
+        BUTTON_NO_9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ERROR();
+                LENGTH();
+                TEXTVIEW_0.setText(TEXTVIEW_0.getText().toString() + "9");
+            }
+        });
+
+        BUTTON_NO_0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ERROR();
+                LENGTH();
+                TEXTVIEW_0.setText(TEXTVIEW_0.getText().toString() + "0");
+            }
+        });
+
+        BUTTON_DOT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LENGTH();
+                TEXTVIEW_0.setText(TEXTVIEW_0.getText().toString() + ".");
+            }
+        });
+
+        b_para1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TEXTVIEW_0.getText().length() > 0) {
+                    ACTION = MODULUS;
+                    CALCULATE();
+                    if (!DECIMAL()) {
+                        TEXTVIEW_1.setText(val1 + "%");
+                    } else {
+                        TEXTVIEW_1.setText((int) val1 + "%");
+                    }
+                    TEXTVIEW_0.setText(null);
+                } else {
+                    TEXTVIEW_1.setText("Error");
+                }
+            }
+        });
+
+        BUTTON_ADD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TEXTVIEW_0.getText().length() > 0) {
+                    ACTION = ADDITION;
+                    CALCULATE();
+                    if (!DECIMAL()) {
+                        TEXTVIEW_1.setText(val1 + "+");
+                    } else {
+                        TEXTVIEW_1.setText((int) val1 + "+");
+                    }
+                    TEXTVIEW_0.setText(null);
+                } else {
+                    TEXTVIEW_1.setText("Error");
+                }
+            }
+        });
+
+        BUTTON_SUB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TEXTVIEW_0.getText().length() > 0) {
+                    ACTION = SUBTRACTION;
+                    CALCULATE();
+                    if (TEXTVIEW_0.getText().length() > 0)
+                        if (!DECIMAL()) {
+                            TEXTVIEW_1.setText(val1 + "-");
+                        } else {
+                            TEXTVIEW_1.setText((int) val1 + "-");
+                        }
+                    TEXTVIEW_0.setText(null);
+                } else {
+                    TEXTVIEW_1.setText("Error");
+                }
+            }
+        });
+
+        BUTTON_MULTI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TEXTVIEW_0.getText().length() > 0) {
+                    ACTION = MULTIPLICATION;
+                    CALCULATE();
+                    if (!DECIMAL()) {
+                        TEXTVIEW_1.setText(val1 + "×");
+                    } else {
+                        TEXTVIEW_1.setText((int) val1 + "×");
+                    }
+                    TEXTVIEW_0.setText(null);
+                } else {
+                    TEXTVIEW_1.setText("Error");
+                }
+            }
+        });
+
+        BUTTON_DIVIDE.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TEXTVIEW_0.getText().length() > 0) {
+                    ACTION = DIVISION;
+                    CALCULATE();
+                    if (DECIMAL()) {
+                        TEXTVIEW_1.setText((int) val1 + "/");
+                    } else {
+                        TEXTVIEW_1.setText(val1 + "/");
+                    }
+                    TEXTVIEW_0.setText(null);
+                } else {
+                    TEXTVIEW_1.setText("Error");
+                }
+            }
+        });
+
+        b_para2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!TEXTVIEW_1.getText().toString().isEmpty() || !TEXTVIEW_0.getText().toString().isEmpty()) {
+                    val1 = Double.parseDouble(TEXTVIEW_0.getText().toString());
+                    ACTION = EXTRA;
+                    TEXTVIEW_1.setText("-" + TEXTVIEW_0.getText().toString());
+                    TEXTVIEW_0.setText("");
+                } else {
+                    TEXTVIEW_1.setText("Error");
+                }
+            }
+        });
+
+        BUTTON_EQUAL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TEXTVIEW_0.getText().length() > 0) {
+                    CALCULATE();
+                    ACTION = EQU;
+                    if (!DECIMAL()) {
+                        TEXTVIEW_1.setText(String.valueOf(val1));
+                    } else {
+                        TEXTVIEW_1.setText(String.valueOf((int) val1));
+                    }
+                    TEXTVIEW_0.setText(null);
+                } else {
+                    TEXTVIEW_1.setText("Error");
+                }
+            }
+        });
+
+        BUTTON_CLEAR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (TEXTVIEW_0.getText().length() > 0) {
+                    CharSequence name = TEXTVIEW_0.getText().toString();
+                    TEXTVIEW_0.setText(name.subSequence(0, name.length() - 1));
+                } else {
+                    val1 = Double.NaN;
+                    val2 = Double.NaN;
+                    TEXTVIEW_0.setText("");
+                    TEXTVIEW_1.setText("");
+                }
+            }
+        });
+    }
+
+    private void CALCULATE() {
+        if (!Double.isNaN(val1)) {
+            if (TEXTVIEW_1.getText().toString().charAt(0) == '-') {
+                val1 = (-1) * val1;
+            }
+            val2 = Double.parseDouble(TEXTVIEW_0.getText().toString());
+
+            switch (ACTION) {
+                case ADDITION:
+                    val1 = val1 + val2;
+                    break;
+                case SUBTRACTION:
+                    val1 = val1 - val2;
+                    break;
+                case MULTIPLICATION:
+                    val1 = val1 * val2;
+                    break;
+                case DIVISION:
+                    val1 = val1 / val2;
+                    break;
+                case EXTRA:
+                    val1 = (-1) * val1;
+                    break;
+                case MODULUS:
+                    val1 = val1 % val2;
+                    break;
+                case EQU:
+                    break;
+            }
+        } else {
+            val1 = Double.parseDouble(TEXTVIEW_0.getText().toString());
+        }
+    }
+
+    private void ERROR() {
+        if (TEXTVIEW_1.getText().toString().equals("Error")) {
+            TEXTVIEW_1.setText("");
+        }
+    }
+
+    private boolean DECIMAL() {
+        return val1 == (int) val1;
+    }
+
+    private void LENGTH() {
+        if (TEXTVIEW_0.getText().toString().length() > 10) {
+            TEXTVIEW_0.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        }
+    }
+}
 
